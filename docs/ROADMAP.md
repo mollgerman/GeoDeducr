@@ -15,11 +15,11 @@
 | Step | What | Rule / source |
 |---|---|---|
 | 1.1 | Commit local work on the lab Mac → **Integrate → Pull**. Add `.gitignore` (`xcuserdata/`, `DerivedData/`, `.DS_Store`) and stop tracking `xcuserdata` | W4 Git |
-| 1.2 | Folders **Models / ViewModels / Views (+ Components) / Services / Utils / Resources**. **One type per file**. Rename `MyApp` → `GeoDeducrApp`, `ContentView` → `MainView` | W4 rules + folders |
+| 1.2 | Folders **Models / ViewModels / Views (+ Components) / Services / Utils / Resources**. **One type per file** (W4 convention, not an Apple rule). `MyApp` → `GeoDeducrApp` (Xcode's default naming); `ContentView` is Apple's template name and stays | W4 rules + folders |
 | 1.3 | Theme: the 4 missing font styles. Commit `ModeCard.swift` into `Views/Components/` | W4 Text |
 | 1.4 | `extension GameMode { fill, lip, textColor }` → `HomeView` uses `ForEach(GameMode.allCases)` | W5 enums |
 | 1.5 | `HomeView` layout: sky gradient, ground, logo, wooden board, total score. Keep `body` small: split into subviews | W4 small views |
-| 1.6 | `MainView` = `TabView` with `Tab("Home", systemImage: "house.fill")`, Passport, Settings (placeholders) | W4 TabView |
+| 1.6 | `ContentView` = `TabView` with `Tab("Home", systemImage: "house.fill")`, Passport, Settings (placeholders) | W4 TabView |
 | 1.7 | Tap a mode card → `fullScreenCover` with a placeholder `GameView` (`@State`) | W4 Views and state |
 | 1.8 | ★ Run on your iPhone once (Developer Mode). Check the smallest and largest simulators | W4, W2 |
 
@@ -34,7 +34,7 @@
 | 2.1 | `Services/CityService`: load `cities.json` from the bundle with `JSONDecoder`, `do/catch`, `Logger` (no `try!`) | W5 JSON, W4 Logger |
 | 2.2 | `ViewModels/GameViewModel` (`@MainActor @Observable final class`): 5 random cities, current round, pin, unlocked clues, scores | W4/W5 MVVM |
 | 2.3 | `Views/Game/GameView`: `Map` with country-level zoom (`MapCameraBounds`), tap to drop a pin (`MapReader`). The View only talks to the ViewModel | MapKit for SwiftUI |
-| 2.4 | Clue panel (`presentationDetents`): newest clue, unlock next (−1,000), "Confirm guess" | — |
+| 2.4 | Clue panel (done as a bottom panel with `safeAreaInset`, not a sheet: simpler with the full-screen cover): newest clue, unlock next (−1,000), "Confirm guess" | — |
 | 2.5 | `RoundResultView`: distance (`CLLocation.distance(from:)`), city photo (`.resizable().scaledToFill().clipShape(…)`), points, "Next round" | W5 Images |
 | 2.6 | ★ The 15 photos in Assets | W5 Images |
 
@@ -76,8 +76,8 @@
 ## Progress
 | Class | Date | Done | Notes |
 |---|---|---|---|
-| Before 1 | | | |
-| 1 | | | |
-| 2 | | | |
+| Before 1 | 22 Nov | Exercise replaced by real models (Part 2) | |
+| 1 | 17 + 22 Nov | 1.1–1.7 written | 1.8 iPhone run open; 22 Nov code not compiled yet |
+| 2 | 22 Nov | 2.1–2.5 written | 2.6 photos open; test in the lab |
 | 3 | | | |
 | 4 | | | |

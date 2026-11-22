@@ -38,14 +38,29 @@ Single source of truth between sessions. Read this first in every new session.
 - [x] Read the functional design (PDF)
 - [x] Choose structure (by layer)
 - [x] Lesson 1: anatomy of the starter project (`MyApp.swift`, `ContentView.swift`) + Swift basics. You wrote `let totalScore` + string interpolation in `ContentView`. Tip: `.formatted()` for thousands separators.
-- [ ] Lesson 2: colors in the asset catalog (you add the palette)
-- [ ] Lesson 3: first view, `HomeView` layout (VStack/HStack/ZStack)
-- [ ] Lesson 4: model `GameMode` (enum, switch, computed properties)
-- [ ] Lesson 5: reusable component `ModeCard` (struct with inputs)
-- [ ] Lesson 6: reusable style (`ViewModifier`) for the chunky outline + lip
-- [ ] Lesson 7: custom fonts (Info.plist `UIAppFonts`, `Font.custom(_:size:relativeTo:)`)
+- [x] Lesson 2: colors in the asset catalog (you add the palette)
+- [x] Lesson 3: first view, `HomeView` layout (VStack/HStack/ZStack)
+- [x] Lesson 4: model `GameMode` (enum, switch, computed properties)
+- [x] Lesson 5: reusable component `ModeCard` (struct with inputs)
+- [x] Lesson 6: reusable style (`ViewModifier`) for the chunky outline + lip
+- [x] Lesson 7: custom fonts (Info.plist `UIAppFonts`, `Font.custom(_:size:relativeTo:)`)
 - [ ] Later: tabs, game screen, map, data JSON, audio/video, animations, persistence
 
 ## Session notes
 ### 2026-10-26
 - Claude got ahead and generated a full Home screen. You stopped it; code was removed (backup kept outside the repo). We restart with the step-by-step method above.
+
+### 2026-11-17 (lab, class 1)
+- Folders reorganised (Models, Views, Utils, Resources/Fonts). Build failure was caused by opening the folder instead of `GeoDeducr.xcodeproj`: always open the .xcodeproj.
+- Theme: 4 missing text styles. ModeCard, ChunkyBackground (ViewModifier), GameMode + GameMode+Style, SkyBackground (own sun), ModeBoard, ScorePanel, HomeView.
+- Lesson: a shadow at the end of a view chain also shadows the text inside; put it on the background shape.
+
+### 2026-11-22 (home, Windows, Claude session – nothing compiled yet, test in the lab)
+- Rules followed: docs/PROFESSOR_RULES.md (lectures W2–W5) + Apple docs. Plan: docs/ROADMAP.md.
+- Part 1 (class 1 · 1.1, 1.2, 1.6, 1.7): .gitignore + xcuserdata untracked; MyApp → GeoDeducrApp; HomeBoard.swift → ModeBoard.swift; ContentView = TabView (Home, Passport, Settings) with `.tint(Color.accent)`; mode cards are Buttons → `@Binding selectedMode` → `fullScreenCover(item:)`; Passport/Settings placeholders with ContentUnavailableView.
+- Part 2 (homework A): models ClueKind, Clue, CityFacts, City (Codable) + Resources/cities.json (5 cities, snake_case keys).
+- Part 3 (class 2 · 2.1, 2.2): CityService (Bundle + JSONDecoder .convertFromSnakeCase, throws), Logger+App, Scoring (0.4 pt/km beyond 25 km – to confirm), RoundResult (CLLocation.distance), City+Clues (random facts, Few hints = first 3, Blitz = 2 random, live clue = local time), GameViewModel (@MainActor @Observable, private(set) state).
+- Part 4 (class 2 · 2.3–2.5): GameView (Map + MapReader tap-to-pin, MapCameraBounds 1,500 km, .imagery style, quit alert, error state), CluePanel (bottom panel instead of a sheet), ClueCard, RoundResultView (photo placeholder, breakdown, Next round).
+- Quizzes for parts 1–3 done.
+- Still open: 1.8 iPhone run, 2.6 the 15 photos (+ CREDITS.md), cities.json to 15 cities, delete empty GeoDeducr/Model folder.
+

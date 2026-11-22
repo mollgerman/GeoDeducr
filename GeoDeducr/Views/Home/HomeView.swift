@@ -28,7 +28,7 @@ struct HomeView: View {
         .scrollBounceBehavior(.basedOnSize)
         .background { SkyBackground() }
         .fullScreenCover(item: $selectedMode) { mode in
-            GameView(mode: mode)    // closing it sets selectedMode back to nil
+            GameView(viewModel: GameViewModel(mode: mode))    // closing it sets selectedMode back to nil
         }
     }
 
