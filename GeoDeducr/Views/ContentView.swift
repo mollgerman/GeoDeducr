@@ -1,29 +1,23 @@
-// xcode: set sdk=iOS
-
 import SwiftUI
-import Playgrounds
 
+/// The root view: the app's three main sections in a tab bar (Module 1 design).
 struct ContentView: View {
-    let totalScore = 999_999
     var body: some View {
-        HStack(spacing: 0) {
-            Text("Geo").foregroundStyle(Color.brandAccent)
-            Text("Deducr").foregroundStyle(Color.brand)
+        TabView {
+            Tab("Home", systemImage: "house.fill") {
+                HomeView()
+            }
+            Tab("Passport", systemImage: "book.closed.fill") {
+                PassportView()
+            }
+            Tab("Settings", systemImage: "gearshape.fill") {
+                SettingsView()
+            }
         }
-        .font(.gdLogo)
-        Text("Total: \(totalScore.formatted()) pts")
-            .font(.gdHeadline)
-            .padding()
-            .foregroundStyle(Color.cream)
-            .background(Color.wood)
-        }
+        .tint(Color.accent)   // the selected tab (and later every system control) in the accent green
+    }
 }
-
 
 #Preview {
     ContentView()
-}
-
-#Playground {
-    _ = 1 + 2
 }

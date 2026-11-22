@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-/// Sky gradient with a green lawn at the bottom (Home, Splash, Game summary).
+/// Sky gradient with a sun and a green lawn (Home, Splash, Game summary).
 struct SkyBackground: View {
     var body: some View {
         LinearGradient(colors: [.skyTop, .skyBottom], startPoint: .top, endPoint: .bottom)
@@ -18,16 +18,15 @@ struct SkyBackground: View {
                     .frame(width: 900, height: 480)
                     .offset(y: 250)
             }
-            .ignoresSafeArea()   // fill behind the status bar and home indicator too
             .overlay(alignment: .top) {
-                // a big ellipse pushed half below the screen = a rounded hill
+                // the sun, to the right of the centre
                 Circle()
                     .fill(Color.modeDailyFill)
                     .frame(width: 100, height: 100)
                     .offset(x: 110, y: 90)
             }
-            .ignoresSafeArea()
-        
+            .ignoresSafeArea()          // fill behind the status bar and home indicator too
+            .accessibilityHidden(true)  // decoration only
     }
 }
 

@@ -11,12 +11,15 @@ struct HomeView: View {
     /// Sample value. The real saved score comes in step 4.1.
     private let totalScore = 999_999
 
+    /// nil = no game running. Setting a mode opens the game full screen.
+    @State private var selectedMode: GameMode?
+
     var body: some View {
         ScrollView {    // scrolls on small iPhones (SE, mini), no bounce when everything fits
             VStack(spacing: 20) {
                 LogoView()
                 tagline
-                ModeBoard()
+                ModeBoard(selectedMode: $selectedMode)   // $ = pass a Binding, not a copy
                 ScorePanel(score: totalScore)
             }
             .padding(.horizontal, 20)
@@ -24,6 +27,9 @@ struct HomeView: View {
         }
         .scrollBounceBehavior(.basedOnSize)
         .background { SkyBackground() }
+        .fullScreenCover(item: $selectedMode) { mode in
+            GameView(mode: mode)    // closing it sets selectedMode back to nil
+        }
     }
 
     private var tagline: some View {

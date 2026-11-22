@@ -1,0 +1,7 @@
+# Xcode: per-user settings and build output (lecture W4: never commit these)
+xcuserdata/
+DerivedData/
+*.xcuserstate
+
+# macOS Finder files
+.DS_Store

@@ -1,5 +1,5 @@
 //
-//  HomeBoard.swift
+//  ModeBoard.swift
 //  GeoDeducr
 //
 //  Created by stud on 17/11/2026.
@@ -9,6 +9,9 @@ import SwiftUI
 
 /// The wooden board with the five mode cards.
 struct ModeBoard: View {
+    /// The mode the player tapped. HomeView owns it (@State); the board only changes it (@Binding).
+    @Binding var selectedMode: GameMode?
+
     var body: some View {
         VStack(spacing: 12) {
             Text("Choose a mode")
@@ -18,14 +21,20 @@ struct ModeBoard: View {
                 .accessibilityAddTraits(.isHeader)
 
             ForEach(GameMode.allCases) { mode in
-                ModeCard(
-                    title: mode.title,
-                    subtitle: mode.subtitle,
-                    icon: mode.icon,
-                    fill: mode.fill,
-                    lip: mode.lip,
-                    textColor: mode.textColor
-                )
+                // Something the player taps is a Button (HIG), with our card as its label
+                Button {
+                    selectedMode = mode
+                } label: {
+                    ModeCard(
+                        title: mode.title,
+                        subtitle: mode.subtitle,
+                        icon: mode.icon,
+                        fill: mode.fill,
+                        lip: mode.lip,
+                        textColor: mode.textColor
+                    )
+                }
+                .buttonStyle(.plain)   // keep our own look instead of the default blue button style
             }
         }
         .padding(.horizontal, 16)
@@ -55,6 +64,6 @@ struct ModeBoard: View {
 }
 
 #Preview {
-    ModeBoard()
+    ModeBoard(selectedMode: .constant(nil))   // a fixed value, only for the preview
         .padding()
 }
