@@ -1,0 +1,132 @@
+[
+  {
+    "id": "paris",
+    "name": "Paris",
+    "country": "France",
+    "latitude": 48.8566,
+    "longitude": 2.3522,
+    "time_zone": "Europe/Paris",
+    "photo": "paris",
+    "fun_fact": "The Eiffel Tower grows about 15 cm taller in summer, because its iron expands in the heat.",
+    "facts": {
+      "geography": [
+        "About 2.1 million people live in the city itself.",
+        "A river splits the city into a north bank and a south bank."
+      ],
+      "language": [
+        "People greet you with \"Bonjour\".",
+        "You pay in euros."
+      ],
+      "food": [
+        "Croissants for breakfast, steak frites for dinner."
+      ],
+      "famous_for": [
+        "A wrought-iron tower built for the 1889 World's Fair."
+      ]
+    }
+  },
+  {
+    "id": "wroclaw",
+    "name": "Wrocław",
+    "country": "Poland",
+    "latitude": 51.1079,
+    "longitude": 17.0385,
+    "time_zone": "Europe/Warsaw",
+    "photo": "wroclaw",
+    "fun_fact": "The bronze dwarfs started as a symbol of the Orange Alternative, an anti-communist protest movement of the 1980s.",
+    "facts": {
+      "geography": [
+        "The city is spread over a dozen islands linked by more than 100 bridges.",
+        "About 670,000 people live here."
+      ],
+      "language": [
+        "People greet you with \"Dzień dobry\".",
+        "You pay in złoty."
+      ],
+      "food": [
+        "Pierogi and żurek, a sour rye soup."
+      ],
+      "famous_for": [
+        "Hundreds of small bronze dwarf statues hide in its streets."
+      ]
+    }
+  },
+  {
+    "id": "tokyo",
+    "name": "Tokyo",
+    "country": "Japan",
+    "latitude": 35.6762,
+    "longitude": 139.6503,
+    "time_zone": "Asia/Tokyo",
+    "photo": "tokyo",
+    "fun_fact": "The city was called Edo until 1868.",
+    "facts": {
+      "geography": [
+        "Its metropolitan area is the most populous in the world, with about 37 million people.",
+        "It sits on a large bay on the Pacific coast."
+      ],
+      "language": [
+        "People greet you with \"Konnichiwa\".",
+        "You pay in yen."
+      ],
+      "food": [
+        "Sushi, ramen and tempura."
+      ],
+      "famous_for": [
+        "One of the busiest pedestrian crossings in the world, at Shibuya."
+      ]
+    }
+  },
+  {
+    "id": "lisbon",
+    "name": "Lisbon",
+    "country": "Portugal",
+    "latitude": 38.7223,
+    "longitude": -9.1393,
+    "time_zone": "Europe/Lisbon",
+    "photo": "lisbon",
+    "fun_fact": "A huge earthquake in 1755 destroyed most of the city.",
+    "facts": {
+      "geography": [
+        "It is built on seven hills above a wide river estuary.",
+        "It is the westernmost capital of mainland Europe."
+      ],
+      "language": [
+        "People greet you with \"Olá\".",
+        "You pay in euros."
+      ],
+      "food": [
+        "Pastel de nata, a custard tart, and grilled sardines."
+      ],
+      "famous_for": [
+        "Old yellow trams climbing its steep streets, like the famous tram 28."
+      ]
+    }
+  },
+  {
+    "id": "buenos-aires",
+    "name": "Buenos Aires",
+    "country": "Argentina",
+    "latitude": -34.6037,
+    "longitude": -58.3816,
+    "time_zone": "America/Argentina/Buenos_Aires",
+    "photo": "buenos-aires",
+    "fun_fact": "Avenida 9 de Julio is one of the widest avenues in the world.",
+    "facts": {
+      "geography": [
+        "It lies on the Río de la Plata, one of the widest river estuaries in the world.",
+        "About 15 million people live in its metropolitan area."
+      ],
+      "language": [
+        "People say \"Hola\" and use \"vos\" instead of \"tú\".",
+        "You pay in pesos."
+      ],
+      "food": [
+        "Asado, empanadas and dulce de leche."
+      ],
+      "famous_for": [
+        "Tango was born in its port neighbourhoods."
+      ]
+    }
+  }
+]
