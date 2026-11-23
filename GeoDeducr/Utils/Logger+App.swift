@@ -7,4 +7,5 @@ extension Logger {
 
     static let cities = Logger(subsystem: subsystem, category: "Cities")
     static let game = Logger(subsystem: subsystem, category: "Game")
+    static let map = Logger(subsystem: subsystem, category: "Map")
 }

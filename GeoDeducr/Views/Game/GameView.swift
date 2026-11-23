@@ -1,7 +1,7 @@
 import SwiftUI
 import MapKit
 
-/// The game screen: a satellite map to drop a pin on, and a panel with the clues or the round result.
+/// The game screen: the map (GameMapView) to drop a pin on, and a panel with the clues or the round result.
 /// MVVM: this view only shows GameViewModel's state and calls its methods.
 struct GameView: View {
     /// Passed in by HomeView, as in the W5 "Good MVVM" slide. @State keeps this first instance
@@ -12,10 +12,6 @@ struct GameView: View {
     @State private var cameraPosition: MapCameraPosition = Self.worldView
     @State private var isConfirmingQuit = false
     @Environment(\.dismiss) private var dismiss
-
-    /// The camera stays at least 1,500 km above the ground (country level),
-    /// so nobody can zoom in to recognise a city.
-    private static let cameraBounds = MapCameraBounds(minimumDistance: 1_500_000)
 
     private static let worldView = MapCameraPosition.region(
         MKCoordinateRegion(
@@ -29,7 +25,7 @@ struct GameView: View {
             if let message = viewModel.errorMessage {
                 errorView(message)
             } else {
-                map
+                GameMapView(viewModel: viewModel, cameraPosition: $cameraPosition)
                     .safeAreaInset(edge: .bottom) {
                         CluePanel(viewModel: viewModel, onFinish: { dismiss() })
                             .padding(.horizontal, 12)
@@ -44,8 +40,9 @@ struct GameView: View {
             }
         }
         .onChange(of: viewModel.lastResult?.id) {
-            if viewModel.lastResult != nil {
-                withAnimation { cameraPosition = .automatic }   // zoom to show the pin and the city
+            if let result = viewModel.lastResult {
+                // zoom to show the pin and the real city together
+                withAnimation { cameraPosition = Self.framing(result.guess, result.city.coordinate) }
             }
         }
         .onChange(of: viewModel.roundIndex) {
@@ -59,28 +56,15 @@ struct GameView: View {
         }
     }
 
-    private var map: some View {
-        MapReader { proxy in
-            Map(position: $cameraPosition, bounds: Self.cameraBounds) {
-                if let pin = viewModel.pin {
-                    Marker("Your guess", systemImage: "mappin", coordinate: pin)
-                        .tint(Color.feedbackDanger)
-                }
-                if let result = viewModel.lastResult {
-                    Marker(result.city.name, systemImage: "star.fill", coordinate: result.city.coordinate)
-                        .tint(Color.feedbackSuccess)
-                    MapPolyline(coordinates: [result.guess, result.city.coordinate])
-                        .stroke(Color.outline, style: StrokeStyle(lineWidth: 3, dash: [8, 6]))
-                }
-            }
-            .mapStyle(.imagery)   // satellite without labels: city names never give the answer away
-            .onTapGesture { location in
-                // MapProxy turns the tapped point on screen into a coordinate on the map
-                if let coordinate = proxy.convert(location, from: .local) {
-                    viewModel.placePin(at: coordinate)
-                }
-            }
-        }
+    /// A camera position that shows both points with some margin around them.
+    /// (.automatic would frame everything on the map, including all the country borders.)
+    private static func framing(_ first: CLLocationCoordinate2D, _ second: CLLocationCoordinate2D) -> MapCameraPosition {
+        let a = MKMapPoint(first)
+        let b = MKMapPoint(second)
+        let rect = MKMapRect(x: min(a.x, b.x), y: min(a.y, b.y),
+                             width: abs(a.x - b.x), height: abs(a.y - b.y))
+        let margin = max(rect.width, rect.height) * 0.4 + 2_000_000   // map points, not metres
+        return .rect(rect.insetBy(dx: -margin, dy: -margin))           // negative inset = bigger rect
     }
 
     private var quitButton: some View {

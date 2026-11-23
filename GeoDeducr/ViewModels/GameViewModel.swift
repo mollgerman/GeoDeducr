@@ -21,12 +21,16 @@ final class GameViewModel {
     private(set) var lastResult: RoundResult?     // set after "Confirm guess"
     private(set) var results: [RoundResult] = []  // one per finished round
     private(set) var errorMessage: String?
+    private(set) var countries: [Country] = []    // borders and names drawn on the map
 
     private let service: CityService
+    private let countryService: CountryService
 
-    init(mode: GameMode, service: CityService = CityService()) {
+    init(mode: GameMode, service: CityService = CityService(),
+         countryService: CountryService = CountryService()) {
         self.mode = mode
         self.service = service
+        self.countryService = countryService
     }
 
     // MARK: - Values derived from the state (the View only reads these)
@@ -46,6 +50,7 @@ final class GameViewModel {
 
     /// Loads the cities and starts round 1 with 5 random ones.
     func startGame() {
+        loadCountriesIfNeeded()
         do {
             let allCities = try service.loadCities()
             cities = Array(allCities.shuffled().prefix(Self.roundsPerGame))
@@ -88,6 +93,16 @@ final class GameViewModel {
     }
 
     // MARK: - Private
+
+    /// The borders only decorate the map: if they fail to load, the game still works without them.
+    private func loadCountriesIfNeeded() {
+        guard countries.isEmpty else { return }
+        do {
+            countries = try countryService.loadCountries()
+        } catch {
+            Logger.map.error("Loading country borders failed: \(error.localizedDescription)")
+        }
+    }
 
     /// Resets everything that belongs to one round.
     private func startRound() {
